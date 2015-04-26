@@ -16,7 +16,8 @@ First I will begin by loading the ggplot2 package:
 library(ggplot2)
 ```
 
-The following code will load the data for us. The basic analysis will shed some light into why I chose the dose variable to be a factor:
+The following code will load the data for us. The basic analysis will shed 
+some light into why I chose the dose variable to be a factor:
 
 ```{r}
 data(ToothGrowth)
@@ -41,6 +42,7 @@ facet_grid(. ~ supp)
 ```
 
 Some things of notes from our basic analysis:
+
 * The dose variable is best set as a factor of 3 levels: 0.5, 1, 2
 * The max value of len is 33.9, while the minimum value is 4.2
 * len has a Mean of 18.81 and a Median of 19.25, very close indeed!
@@ -54,7 +56,12 @@ Some things of notes from our basic analysis:
 t.test(len ~ supp, data=data)
 ```
 
-Summary:
+Summary: 
+
+There certainly appears to be concrete evidence that across all 
+dosage levels, OJ is superior to VC in regards to an increase in tooth length. 
+However, an interesting next step would be to break the t-test out by levels 
+of dosage.
 
 ### Second Analysis
 
@@ -70,7 +77,14 @@ t.test(len ~ supp, data=data[data$dose==1, 1:3])
 t.test(len ~ supp, data=data[data$dose==2, 1:3])
 ```
 
-Summary:
+Summary: 
+
+Our independant t-tests at different levels of dosage shows us a few 
+interesting pieces of information. First of all, there is a clear correlation 
+between increase in dose and increase in tooth length. In addition, across all 
+dosage levels, OJ is clearly superior to VC. However, that affect is much more 
+material in the lower doses; once the dose is at level 2, the affect is almost 
+the same. 
 
 ## Conclusions and Assumptions
 
@@ -80,6 +94,7 @@ Summary:
 will result in an increase in the tooth length (len)
 * However, the type of supplement used has a much smaller impact than the dose 
 of the supplement
+* OJ is much more affective at lower dosage levels than is VC
 
 ### Assumptions
 
