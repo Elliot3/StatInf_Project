@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 # Exponential Distribution in R and the Central Limit Theorem
 
 ### Elliot Smith
