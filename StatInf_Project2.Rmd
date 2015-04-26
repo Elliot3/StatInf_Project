@@ -1,0 +1,88 @@
+# ToothGrowth Data Analysis
+
+### Elliot Smith
+
+## Overview
+
+In this project, I will be performing some analyses on the ToothGrowth 
+dataset. Using techniques learned in the course, I will draw some conclusions 
+on this dataset.
+
+## Load the Date and Basic Analyses
+
+First I will begin by loading the ggplot2 package:
+
+```{r}
+library(ggplot2)
+```
+
+The following code will load the data for us. The basic analysis will shed some light into why I chose the dose variable to be a factor:
+
+```{r}
+data(ToothGrowth)
+data <- ToothGrowth
+data$dose <- as.factor(data$dose)
+```
+
+Now for a basic analysis:
+
+```{r}
+str(data)
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+ggplot(data=data, aes(x=dose, y=len, fill=supp)) +
+geom_bar(stat="identity",) +
+facet_grid(. ~ supp)
+```
+
+Some things of notes from our basic analysis:
+* The dose variable is best set as a factor of 3 levels: 0.5, 1, 2
+* The max value of len is 33.9, while the minimum value is 4.2
+* len has a Mean of 18.81 and a Median of 19.25, very close indeed!
+* There exists a positive correlation between dose levels and tooth length
+
+## Advanced Analysis
+
+### First Analysis
+
+```{r}
+t.test(len ~ supp, data=data)
+```
+
+Summary:
+
+### Second Analysis
+
+```{r}
+t.test(len ~ supp, data=data[data$dose==0.5, 1:3])
+```
+
+```{r}
+t.test(len ~ supp, data=data[data$dose==1, 1:3])
+```
+
+```{r}
+t.test(len ~ supp, data=data[data$dose==2, 1:3])
+```
+
+Summary:
+
+## Conclusions and Assumptions
+
+### Conclusions
+
+* Based on the dataset provided, it is safe to say that increasing the dose 
+will result in an increase in the tooth length (len)
+* However, the type of supplement used has a much smaller impact than the dose 
+of the supplement
+
+### Assumptions
+
+* The sample is representative of the population
+* The variances of the two populations are different
+
